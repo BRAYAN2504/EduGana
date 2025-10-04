@@ -7,19 +7,17 @@ function initializeApp() {
     var loginText = document.getElementById('loginText');
     var loginSpinner = document.getElementById('loginSpinner');
 
-    // Alternar visibilidad de la contraseña
     togglePassword.addEventListener('click', function () {
-        var isPassword = passwordInput.getAttribute('type') === 'password';
-        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
 
         eyeIcon.classList.toggle('hidden');
         eyeOffIcon.classList.toggle('hidden');
     });
 
-    // Acción del botón de inicio de sesión
     loginBtn.addEventListener('click', function () {
-        var email = document.getElementById('email').value.trim();
-        var password = document.getElementById('password').value.trim();
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
 
         if (!email || !password) {
             alert('Por favor completa todos los campos');
@@ -30,17 +28,19 @@ function initializeApp() {
         loginText.classList.add('hidden');
         loginSpinner.classList.remove('hidden');
 
-        // Simular carga (puedes reemplazar esto con lógica real más adelante)
         setTimeout(function () {
             loginBtn.disabled = false;
             loginText.classList.remove('hidden');
             loginSpinner.classList.add('hidden');
+
             alert('¡Bienvenido a EduGana!');
+
+            // 🔁 Redirige a la página de matrícula (ajusta si el nombre o ubicación del archivo es diferente)
+            window.location.href = "matricula.html";
         }, 1500);
     });
 }
 
-// Asegurar que el DOM esté listo antes de ejecutar
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeApp);
 } else {

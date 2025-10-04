@@ -1,321 +1,300 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <title>EduGana - Inicio de Sesión</title>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #2563eb 0%, #9333ea 50%, #ec4899 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .bg-decoration {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.1;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        .bg-decoration-1 {
-            top: 80px;
-            left: 40px;
-            width: 288px;
-            height: 288px;
-            background: white;
-        }
-
-        .bg-decoration-2 {
-            bottom: 80px;
-            right: 40px;
-            width: 384px;
-            height: 384px;
-            background: #d8b4fe;
-            animation-delay: 1s;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.15; }
-        }
-
-        .container {
-            width: 100%;
-            max-width: 448px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card {
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
-            padding: 32px;
-            text-align: center;
-        }
-
-        .logo-container {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 64px;
-            height: 64px;
-            background: white;
-            border-radius: 16px;
-            margin-bottom: 16px;
-            transition: transform 0.3s;
-        }
-
-        .logo-container:active {
-            transform: scale(1.1);
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            color: #9333ea;
-        }
-
-        .app-title {
-            font-size: 30px;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        .app-subtitle {
-            color: #dbeafe;
-            font-size: 14px;
-        }
-
-        .content {
-            padding: 32px;
-        }
-
-        .welcome-title {
-            font-size: 24px;
-            font-weight: bold;
-            color: #1f2937;
-            margin-bottom: 8px;
-        }
-
-        .welcome-subtitle {
-            color: #6b7280;
-            margin-bottom: 24px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: #374151;
-            margin-bottom: 8px;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            color: #9ca3af;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 12px 12px 44px;
-            border: 1px solid #d1d5db;
-            border-radius: 12px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.2s;
-        }
-
-        .form-input:focus {
-            border-color: #9333ea;
-            box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            color: #9ca3af;
-        }
-
-        .password-toggle:active {
-            color: #6b7280;
-        }
-
-        .remember-row {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            color: #6b7280;
-        }
-
-        .checkbox-label input {
-            margin-right: 8px;
-            width: 16px;
-            height: 16px;
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #2563eb 0%, #9333ea 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-login:active {
-            transform: scale(0.98);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-login:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn-login .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduGana - Inicio de Sesión</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #dbe9d8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .bg-decoration {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.1;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .bg-decoration-1 {
+      top: 80px;
+      left: 40px;
+      width: 288px;
+      height: 288px;
+      background: #c5d6b9;
+    }
+    .bg-decoration-2 {
+      bottom: 80px;
+      right: 40px;
+      width: 384px;
+      height: 384px;
+      background: #a3bb87;
+      animation-delay: 1s;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.1; }
+      50% { opacity: 0.15; }
+    }
+    .container {
+      width: 100%;
+      max-width: 448px;
+      position: relative;
+      z-index: 1;
+    }
+    .card {
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #6aa84f, #38761d);
+      padding: 32px;
+      text-align: center;
+    }
+    .logo-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      transition: transform 0.3s;
+    }
+    .logo-container:active {
+      transform: scale(1.1);
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      color: #274e13;
+    }
+    .app-title {
+      font-size: 30px;
+      font-weight: bold;
+      color: #274e13;
+      margin-bottom: 8px;
+    }
+    .app-subtitle {
+      color: #a3c293;
+      font-size: 14px;
+    }
+    .content {
+      padding: 32px;
+    }
+    .welcome-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #3b5a0b;
+      margin-bottom: 8px;
+    }
+    .welcome-subtitle {
+      color: #6b8e23;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #4a633f;
+      margin-bottom: 8px;
+    }
+    .input-wrapper {
+      position: relative;
+    }
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: #7f9e6b;
+    }
+    .form-input {
+      width: 100%;
+      padding: 12px 12px 12px 44px;
+      border: 1px solid #a3b18a;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input:focus {
+      border-color: #6aa84f;
+      box-shadow: 0 0 0 3px rgba(106,168,79,0.2);
+    }
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: #7f9e6b;
+    }
+    .password-toggle:active {
+      color: #557a3f;
+    }
+    .remember-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #4a633f;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .checkbox-label input {
+      margin-right: 8px;
+      width: 16px;
+      height: 16px;
+    }
+    .btn-login {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #6aa84f, #38761d);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 6px -1px rgba(56,118,29,0.5);
+    }
+    .btn-login:active {
+      transform: scale(0.98);
+      box-shadow: 0 10px 15px -3px rgba(106,168,79,0.5);
+    }
+    .btn-login:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-login .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="bg-decoration bg-decoration-1"></div>
-    <div class="bg-decoration bg-decoration-2"></div>
+  <div class="bg-decoration bg-decoration-1"></div>
+  <div class="bg-decoration bg-decoration-2"></div>
 
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <div class="logo-container">
-                    <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                    </svg>
-                </div>
-                <h1 class="app-title">EduGana</h1>
-                <p class="app-subtitle">Aprende y Gana con Cada Lección</p>
-            </div>
-
-            <div class="content">
-                <h2 class="welcome-title">Bienvenido de nuevo</h2>
-                <p class="welcome-subtitle">Ingresa tus credenciales para continuar</p>
-
-                <div class="form-group">
-                    <label for="email" class="form-label">Correo electrónico</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                        </svg>
-                        <input type="email" id="email" class="form-input" placeholder="tu@email.com">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <div class="input-wrapper">
-                        <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                        </svg>
-                        <input type="password" id="password" class="form-input" placeholder="••••••••">
-                        <button type="button" class="password-toggle" id="togglePassword">
-                            <svg id="eyeIcon" class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                            <svg id="eyeOffIcon" class="input-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="remember-row">
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="remember">
-                        <span>Recordarme</span>
-                    </label>
-                </div>
-
-                <button class="btn-login" id="loginBtn">
-                    <span id="loginText">Iniciar Sesión</span>
-                    <span id="loginSpinner" class="hidden">
-                        <span class="spinner"></span>
-                        Iniciando sesión...
-                    </span>
-                </button>
-            </div>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div class="logo-container" tabindex="0">
+          <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+          </svg>
         </div>
-    </div>
+        <h1 class="app-title">EduGana</h1>
+        <p class="app-subtitle">Aprende y Gana con Cada Lección</p>
+      </div>
 
-    <script src="login.js"></script>
+      <div class="content">
+        <h2 class="welcome-title">Bienvenido de nuevo</h2>
+        <p class="welcome-subtitle">Ingresa tus credenciales para continuar</p>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <input type="email" id="email" class="form-input" placeholder="tu@email.com" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Contraseña</label>
+          <div class="input-wrapper">
+            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+            <input type="password" id="password" class="form-input" placeholder="••••••••" />
+            <button type="button" class="password-toggle" id="togglePassword" aria-label="Mostrar contraseña">
+              <svg id="eyeIcon" class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+              </svg>
+              <svg id="eyeOffIcon" class="input-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="remember-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="remember" />
+            Recordarme
+          </label>
+        </div>
+
+        <button class="btn-login" id="loginBtn">
+          <span id="loginText">Iniciar Sesión</span>
+          <span id="loginSpinner" class="hidden">
+            <span class="spinner"></span>
+            Iniciando sesión...
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    const eyeOffIcon = document.getElementById('eyeOffIcon');
+
+    togglePassword.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.classList.add('hidden');
+        eyeOffIcon.classList.remove('hidden');
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.classList.remove('hidden');
+        eyeOffIcon.classList.add('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
